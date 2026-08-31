@@ -1,0 +1,484 @@
+\documentclass[conference]{IEEEtran}
+
+% =========================================================
+% PACKAGES
+% =========================================================
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{url}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{balance}
+
+% =========================================================
+% COMPACT SPACING - IEEE FRIENDLY
+% Keeps all content unchanged and removes unnecessary whitespace
+% =========================================================
+\setlength{\parskip}{0pt}
+\setlength{\abovedisplayskip}{4pt plus 1pt minus 2pt}
+\setlength{\belowdisplayskip}{4pt plus 1pt minus 2pt}
+\setlength{\abovedisplayshortskip}{2pt plus 1pt minus 1pt}
+\setlength{\belowdisplayshortskip}{2pt plus 1pt minus 1pt}
+\setlength{\textfloatsep}{5pt plus 1pt minus 2pt}
+\setlength{\floatsep}{4pt plus 1pt minus 1pt}
+\setlength{\intextsep}{5pt plus 1pt minus 2pt}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{0.94}
+\setlist{nosep}
+\setlist[itemize]{leftmargin=*,topsep=2pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{leftmargin=*,topsep=2pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+
+% =========================================================
+% DOCUMENT
+% =========================================================
+\begin{document}
+
+% =========================================================
+% TITLE
+% =========================================================
+\title{
+YouTube Comment Sentiment and Emotion Analysis Using Natural Language Processing for English and Hinglish Text
+}
+
+% =========================================================
+% AUTHORS
+% =========================================================
+\author{
+
+\IEEEauthorblockA{
+Department of Computer Applications\\
+JAIN (Deemed-to-be University)\\
+Bengaluru, India
+}
+
+\IEEEauthorblockA{
+Rupesh Singh -- 25MCAR0017\\
+Pankaj Singh -- 25MCAR0223\\
+Chiranth PG -- 25MCAR0169\\
+Dhanya Varsha -- 25MCAR0201
+}
+
+}
+
+\maketitle
+
+% =========================================================
+% ABSTRACT
+% =========================================================
+\begin{abstract}
+
+YouTube has turned into a significant medium for public discussion whereby users give their views, feedback, acknowledgments, criticism and emotions through comments. Ubiquity of comments and their informal character make the human analysis impossible. Natural Language Processing provides techniques that help to process and analyze the textual information automatically.
+
+The project demonstrates the implementation of an NLP framework for the analysis of YouTube comments written in English and Hinglish or containing code-mixed words and phrases. Hinglish refers to the informal use of Hindi and English within one comment, which has become a typical feature of Indian social media discourse. The workflow of the analysis encompasses different stages, such as the collection and cleaning of the dataset, the normalization of text, the tokenization and removal of stop words, the extraction of the features, sentiment analysis, and visualization.
+
+The analysis is based on a large-scale dataset containing more than 20,000 YouTube comments. \cite{go,kouloumpis} The comments represent different forms of user reaction and can serve as a good example of how noisy user-generated social media text looks like. Thus, the project focuses on the development of a systematic pipeline for processing and analyzing such comments.
+
+The study exemplifies the use of NLP techniques in multilingual and code-mixed posting on social media and sets a solid base for its further expansion with the help of machine learning and modern-language models.
+
+\end{abstract}
+
+% =========================================================
+% KEYWORDS
+% =========================================================
+\begin{IEEEkeywords}
+Natural Language Processing, YouTube Comments, Sentiment Analysis,
+Emotion Analysis, Hinglish, Code-Mixed Text, Text Preprocessing,
+Tokenization, Feature Extraction, Social Media Analysis
+\end{IEEEkeywords}
+
+% =========================================================
+% 1. INTRODUCTION
+% =========================================================
+\section{Introduction}
+
+Social media is growing at a fast pace, leading to an increase in user-generated writing. YouTube is one of the most common video-sharing websites, allowing comments and engaging with the audience. Comments left by viewers provide various data regarding what people think, feel, and express about the content. \cite{go,kouloumpis}
+
+It is not easy to examine the comments since there are a lot of comments on the famous videos on YouTube. Natural Language Processing (NLP) provides means for machines to comprehend human speech and analyse huge volumes of text. \cite{jurafsky,bird}
+
+Sentiment analysis is one of the applications of NLP. It aims at determining the polarity of the text, which can be categorised as positive, negative, or neutral. Emotional analysis is a further development of sentiment analysis, where emotions that are present in the text can be determined. \cite{pang,liu}
+
+Code-mixed language is a challenging aspect of Indian social media. A code-mixed text is one that contains many English and Hindi words. \cite{barman} For instance, a user may write:
+
+\begin{quote}
+``This video bahut achha hai, loved it!''
+\end{quote}
+
+The text consists of both English and Hindi expressions, which are typically referred to as Hinglish or Hindi-English mixed texts. Thus, the focal aspect of this project is to create an NLP methodology for analysing YouTube comments which contain both English and Hinglish phrases.
+
+% =========================================================
+% 2. PROBLEM DEFINITION
+% =========================================================
+\section{Problem Definition}
+
+Comments on YouTube can be in a range of forms and are often not very formal. There can exist various forms of writing and visual expression like different spellings, symbols, repetitions, and expressions of emotions in the comments. Such a variety offers difficulties for computer analysis.
+
+The problem which is tackled in this project is described below:
+
+\begin{quote}
+\textit{How can Natural Language Processing techniques be used to preprocess and analyse a large collection of YouTube comments containing English and Hinglish expressions in order to identify sentiment and emotional characteristics?}
+\end{quote}
+
+The proposed system aims to transform raw comments into a structured textual representation suitable for sentiment and emotion analysis.
+
+% =========================================================
+% 3. OBJECTIVES
+% =========================================================
+\section{Objectives}
+
+The major objectives of the project are:
+
+\begin{enumerate}[label=\arabic*.]
+
+\item To collect a large dataset of YouTube comments containing English and Hinglish expressions.
+
+\item To understand the characteristics of user-generated social media comments.
+
+\item To perform data cleaning and preprocessing on raw comments.
+
+\item To remove irrelevant textual noise while preserving useful linguistic information.
+
+\item To normalize the comments for further NLP processing.
+
+\item To tokenize comments into meaningful textual units.
+
+\item To apply appropriate stop-word and text-processing techniques.
+
+\item To extract useful features from the processed comments.
+
+\item To analyse the sentiment and emotional characteristics of comments.
+
+\item To visualize important characteristics and results obtained from the dataset.
+
+\item To develop a systematic NLP pipeline that can be extended to machine learning based classification.
+
+\end{enumerate}
+
+% =========================================================
+% 4. SIGNIFICANCE OF THE PROJECT
+% =========================================================
+\section{Significance of the Project}
+
+The selected problem is relevant to NLP because YouTube comments represent real-world, noisy and informal textual data.
+
+Unlike formal documents, social media comments may contain:
+
+\begin{itemize}
+\item Informal language
+\item Spelling variations
+\item Abbreviations
+\item Emojis
+\item Slang
+\item Repeated characters
+\item URLs
+\item User mentions
+\item Hindi-English code-mixing
+\end{itemize}
+
+Analysing this type of text provides practical experience with several important NLP operations.
+
+The project therefore demonstrates the application of NLP to a realistic social media problem rather than using only clean and formally written text.
+
+% =========================================================
+% 5. LITERATURE CONTEXT
+% =========================================================
+\section{Literature Context}
+
+Sentiment analysis is one of the theoretical research fields in Natural Language Processing. The early approaches were concentrating on revealing whether the document or sentence conveys positive, negative, or neutral messages. Advanced techniques try to specify the emotions being conveyed and the context. \cite{pang,liu}
+
+
+The social media text causes more additional difficulties, as the users do not adhere to the rules of official writing. For instance, the words may be abbreviated, and distorted, the spelling may be incorrect, and may contain the mix of emotional symbols like emoticons and informal expressions. \cite{bird,barman}
+
+
+One more significant issue is code-mixing. In cases of multiparty societies, the users can switch between languages when they communicate. The example of code-mixing could be the combination of Hindi and English languages in one unit. \cite{barman}
+
+
+Therefore, traditional methods of the English language processing will have to undergo additional processing application so as to work with Hinglish comments. \cite{barman}
+
+% =========================================================
+% 6. DATASET COLLECTION
+% =========================================================
+\section{Dataset Collection}
+
+The collection used for this project is made up of a large number of YouTube comments. It contains over 20,000 comment records in English and Hinglish or code-mixed language. \cite{barman,bali}
+
+This dataset is expected to capture real audience communication and encompasses different types of comments such as appreciation, critique, fun, queries, ideas, positive comments, negative comments, and neutral comments.
+
+\subsection{Dataset Characteristics}
+
+The major characteristics of the dataset are presented in Table~\ref{tab:dataset}.
+
+\begin{table}[H]
+\centering
+\caption{Dataset Characteristics}
+\label{tab:dataset}
+\begin{tabular}{|p{3.0cm}|p{4.0cm}|}
+\hline
+\textbf{Characteristic} & \textbf{Description} \\
+\hline
+Application Domain & YouTube Comments \\
+\hline
+Dataset Size & More than 20,000 comments \\
+\hline
+Text Type & User-generated comments \\
+\hline
+Languages & English and Hinglish/Code-mixed text \\
+\hline
+Data Type & Textual data \\
+\hline
+Primary Task & Sentiment and Emotion Analysis \\
+\hline
+Processing & NLP-based preprocessing and analysis \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Dataset Relevance}
+
+The dataset is chosen for the problem statement as it caters to an ample number of actual comments and includes the informal communication associated with social media. \cite{kouloumpis}
+
+Moreover, the usage of both English and Hinglish in the dataset makes it more relevant for dealing with issues related to code-mixed text.
+
+% =========================================================
+% 7. DATA PREPROCESSING
+% =========================================================
+\section{Data Preprocessing}
+
+Comments made on social media platforms are characterized by high levels of noise. Sentiment or emotion analysis cannot be performed until the comments are transformed into a clearer and more consistent form. 
+
+The preprocessing pipeline is made up of the following steps:
+
+\begin{enumerate}[label=\arabic*.]
+
+\item Data loading
+\item Missing-value handling
+\item Duplicate removal
+\item URL handling
+\item Special-character processing
+\item Text normalization
+\item Lowercase conversion where appropriate
+\item Tokenization
+\item Stop-word processing
+\item Whitespace normalization
+\item Feature preparation
+
+\end{enumerate}
+
+\subsection{Data Cleaning}
+
+Inspecting the data set is the initial action. Missing textual values are treated in the correct way, while any duplicated observations are eliminated to avoid giving undue weight to repeated comments in the analysis.
+
+\subsection{Handling URLs and Special Characters}
+
+A YouTube comment can have links, mentions, hashtags (abbreviated or un-abbreviated), and special characters. These items can act as noise for the classical text classification system.
+
+Yet, any emotion-laden items (like emojis), should be studied thoroughly, as they can convey relevant emotions. \cite{mohammad}
+
+\subsection{Text Normalization}
+
+Normalization reduces unnecessary variation in textual representation. \cite{jurafsky,bird}
+
+For example:
+
+\begin{quote}
+``THIS VIDEO IS AMAZING!!!''
+\end{quote}
+
+can be normalized to:
+
+\begin{quote}
+``this video is amazing''
+\end{quote}
+
+In the case of Hinglish comments, it is crucial that normalization retains Hindi words written in the Roman script, as they hold significance to the current issue being dealt with.
+
+% =========================================================
+% 8. TOKENIZATION
+% =========================================================
+\section{Tokenization}
+
+Tokenization refers to the segmentation of phrases or statements into different and smaller units known as tokens. \cite{jurafsky,bird}
+
+For example:
+
+\begin{quote}
+``This movie bahut achha hai''
+\end{quote}
+
+may be represented as:
+
+\begin{quote}
+[This, movie, bahut, achha, hai]
+\end{quote}
+
+Tokenization enables subsequent operations such as word frequency analysis, stop-word processing and feature extraction. \cite{jurafsky,bird}
+
+The tokenization output generated during implementation is represented in Fig.~\ref{fig:token}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{Token.png}
+\caption{Tokenization output generated during NLP preprocessing.}
+\label{fig:token}
+\end{figure}
+
+% =========================================================
+% 9. STOP-WORD PROCESSING
+% =========================================================
+\section{Stop-Word Processing}
+
+The term "stop words" refers to words that appear often. The problem with using stop words in natural-language-processing is that they imply low discrimination for some tasks. Examples of stop words are the words "the," "is," "a," and "and," which are very common in the English language. \cite{bird,jurafsky} 
+
+By using stop words in natural-language-processing, it is possible to help in reducing the number of dimensions in features. However, for the tasks of sentiment analysis, it is necessary to do this with care because some words should not be considered as stop words, as they can change the meaning of the statement. \cite{jurafsky,pang}
+
+When dealing with Hinglish comments, it is often the case that regular stop-word lists are useless. Therefore, it is very important to take into consideration the nature of code-mixing in the text being analyzed.
+
+% =========================================================
+% 10. COMMENT LENGTH ANALYSIS
+% =========================================================
+\section{Comment Length Analysis}
+
+Comment length is an essential quality of user-generated content. Comments on YouTube can be extremely short expressions or long elaborated judgments.
+
+In the course of the project some investigations on the distribution of comment lengths were carried out. The results of current observations are represented in the
+Fig.~\ref{fig:length}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{length.png}
+\caption{Distribution of YouTube comment lengths.}
+\label{fig:length}
+\end{figure}
+
+Length analysis allows for comprehension of variations across the textual content of the dataset, as brief comments can be comprised of a few words or emojis while the long ones may contain more detailed views and expressions of emotions.
+
+Length analysis is also helpful in defining the necessary preprocessing and feature extraction methods. \cite{manning}
+
+% =========================================================
+% 11. FEATURE EXTRACTION
+% =========================================================
+\section{Feature Extraction}
+
+The raw text cannot be handled directly by machine learning algorithms. Therefore, text data needs to be converted into numerical form before processing them. \cite{manning,salton}
+
+Various methods are available for extraction of the features from the data: \cite{manning,salton}
+
+\begin{itemize}
+\item Bag of Words
+\item TF-IDF
+\item Unigram features
+\item Bigram features
+\item Word-level features
+\item Character-level features
+\end{itemize}
+
+\subsection{TF-IDF}
+
+The term frequency inverse document frequency (TF-IDF) is one of the most popular ways of quantifying text data. \cite{manning,salton}
+
+The inverse document frequency of the term may, in general, be defined as:
+
+\begin{equation}
+IDF(t) =
+\log\left(\frac{N}{df(t)}\right)
+\end{equation}
+
+
+54/200
+copy-text49 words
+where $N$ refers to the total quantity of documents, while $df(t)$ is the number of documents that include term $t$. \cite{manning,salton}
+
+Thus, TF-IDF representation is defined as follows:
+
+\begin{equation}
+TFIDF(t,d)
+=
+TF(t,d)\times IDF(t)
+\end{equation}
+
+This representation gives higher importance to words that are relevant to a particular comment while reducing the influence of words that occur throughout the complete dataset. \cite{manning,salton} \cite{manning,salton}
+
+% =========================================================
+% 12. SENTIMENT ANALYSIS
+% =========================================================
+\section{Sentiment Analysis}
+
+The process of sentiment analysis aims to determine whether a specific text expresses a positive, negative, or neutral sentiment. \cite{pang,liu}
+
+This type of analysis is applied to identify the main emotion of the text.
+
+\begin{table}[H]
+\centering
+\caption{Illustrative Sentiment Examples}
+\label{tab:sentimentexamples}
+\begin{tabular}{|p{1.6cm}|p{5.2cm}|}
+\hline
+\textbf{Type} & \textbf{Example} \\
+\hline
+Positive &
+``This video is amazing!'' \\
+\hline
+Hinglish Positive &
+``Bahut achha video hai!'' \\
+\hline
+Negative &
+``I did not like this video.'' \\
+\hline
+Hinglish Negative &
+``Ye video bilkul achha nahi hai.'' \\
+\hline
+Neutral &
+``When was this video uploaded?'' \\
+\hline
+\end{tabular}
+\end{table}
+
+The sentiment distribution obtained from the implementation is shown in Fig.~\ref{fig:sentiment}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{sentiment.png}
+\caption{Sentiment analysis results obtained from the processed comments.}
+\label{fig:sentiment}
+\end{figure}
+
+The visualization provides an overview of the sentiment characteristics present in the analysed comments. \cite{pang,go}
+
+% =========================================================
+% 13. EMOTION ANALYSIS
+% =========================================================
+\section{Emotion Analysis}
+
+It should be noted that sentiment analysis and emotion analysis are different approaches. \cite{liu}
+
+In sentiment analysis, the focus is on the polarity of the emotions (positive, negative and so on), while emotion analysis aims to identify the emotions in detail. \cite{pang,liu}
+
+The types of emotions may include:
+
+\begin{itemize}
+\item Happiness
+\item Sadness
+\item Anger
+\item Surprise
+\item Fear
+\item Humour
+\item Appreciation
+\item Neutral
+\end{itemize}
+
+For YouTube comments, emotion analysis can provide a more detailed understanding of audience reactions than simple sentiment polarity. \cite{liu,mohammad}
+
+For example:
+
+\begin{quote}
+``Bhai kya mast video hai ��''
+\end{quote}
+
+contains a positive and humorous emotional expression.
+
+Similarly
